@@ -1,7 +1,78 @@
 # WriteWatch Changelog
 
-All notable changes are documented here.
+All notable changes are documented here.  
 Format: [version] — date — summary
+
+---
+
+## [2.1.2-beta] — 2026-05-30
+
+### Fixed
+- **Crash on macOS 15.7+ with plain HTTP.** App Transport Security was treating
+  HTTP connections to tally units as violations and crashing inside
+  `StrictSecurityPolicy::reportATSExceptionEvent` / `URLConnectionLoader` — a
+  SIGSEGV at a near-null address in CFNetwork's timer setup. Added
+  `NSAppTransportSecurity → NSAllowsLocalNetworking: true` to Info.plist so
+  ATS treats plain HTTP to local network addresses as permitted and never enters
+  the exception-reporting code path.
+
+---
+
+## [2.1.1-beta] — 2026-05-30
+
+### Fixed
+- **Tally automation works regardless of which tab is active.** The previous
+  fix polled recording state from a timer inside TallyView, which only runs
+  when that tab is visible. The recording observer is now started via `.task`
+  in `WriteWatchApp` and runs for the full app lifetime — so tallies fire
+  correctly even when the user is on the Classic or Modern tab.
+
+---
+
+## [2.1.0-beta] — 2026-05-30
+
+### Fixed
+- **Tallies now turn off when WriteWatch stops detecting active writes.**
+  `MonitorViewModel.globalActiveCount` is a computed property derived from
+  nested `FileTracker` objects; SwiftUI only re-evaluates it when the `folders`
+  array itself changes, not when tracker entries inside folders transition.
+  Added a polling loop in `TallyStore` and a `lastRecordingState` transition
+  guard so `gangOff()` fires reliably on record stop without spamming HTTP
+  calls on every tick.
+
+---
+
+## [2.0.0-beta] — 2026-05-30
+
+### Added
+- **Tally tab** — full tally light controller integrated directly into
+  WriteWatch as a third toolbar mode alongside Classic and Modern.
+- **Follow WriteWatch automation** — when enabled, all tally units fire ON
+  when WriteWatch detects active video writes and fire OFF when writes stop.
+  Manual gang presses override automation and clear automatically at the start
+  of the next record cycle. Auto / Manual / Recording status shown inline.
+- **Bonjour discovery** — scans the local network for `_tally._tcp` services
+  and shows which units are already added.
+- **Manual add** — add units by hostname or IP with automatic address
+  sanitization (strips `http://`, paths, ports; appends `.local` for bare
+  hostnames).
+- **Gang mode** — fires all units simultaneously with a single ON/OFF button.
+  Individual controls are disabled while gang mode is on.
+- **Status polling** — each unit's `/status` endpoint polled every 5 seconds;
+  reachability dot updates automatically.
+- **Inline editing** — name and IP address editable directly in each row.
+- **Firmware folder** — `firmware/tally_light/tally_light.ino` contains the
+  ESP32-S3 W5500 firmware (v5.8). Flash via Arduino IDE.
+- **Network entitlements** — `com.apple.security.network.client`,
+  `NSLocalNetworkUsageDescription`, `NSBonjourServices` added for local HTTP
+  and Bonjour access.
+
+### Changed
+- Toolbar mode switcher replaced with individual icon buttons (Classic:
+  `text.alignleft`, Modern: `square.grid.2x2`, Tally: `record.circle`).
+  Active mode highlighted; switching to Tally does not resize the window.
+- Version bumped to 2.0 — this is a new major release merging
+  `esp32-smallhd-tally-light` and `tally-controller` into WriteWatch.
 
 ---
 
@@ -71,9 +142,9 @@ Format: [version] — date — summary
 ### Fixed
 - Folders restored on launch could occasionally load without actually
   watching (had to be removed and re-added). Restore is now deferred one
-  run-loop tick, the stale timer runs in .common run-loop mode, and start()
-  guards on the watcher object rather than the isWatching flag — so a restored
-  folder reliably begins watching.
+  run-loop tick, the stale timer runs in `.common` run-loop mode, and `start()`
+  guards on the watcher object rather than the `isWatching` flag — so a
+  restored folder reliably begins watching.
 
 ---
 
@@ -139,10 +210,10 @@ Format: [version] — date — summary
 ## [1.4.0-beta] — 2026-05-27
 
 ### Added
-- **Started-recording sound** — a custom two-tone beep (600 Hz lead + 1000 Hz trail,
-  with a brief gap) plays the first time a new file is detected being written.
-  Bundled as `rec_start.aiff` in app Resources. Shows up in Preferences → Sound
-  with a preview button alongside the other event sounds.
+- **Started-recording sound** — a custom two-tone beep (600 Hz lead + 1000 Hz
+  trail, with a brief gap) plays the first time a new file is detected being
+  written. Bundled as `rec_start.aiff` in app Resources. Shows up in
+  Preferences → Sound with a preview button alongside the other event sounds.
 
 ---
 
@@ -156,7 +227,7 @@ Format: [version] — date — summary
 
 ### Fixed
 - Frame rate is now read from the exact rational frame duration (CMTime)
-  rather than the rounded nominalFrameRate float, so true 30 fps footage no
+  rather than the rounded `nominalFrameRate` float, so true 30 fps footage no
   longer mis-reports as 29.97 (and vice-versa).
 
 ---
@@ -183,7 +254,7 @@ Format: [version] — date — summary
   correctly limits both the live watcher and the initial scan to the top-level
   folder only (previously always recursed).
 - Poll interval setting is now actually honored by the folder watcher
-  (was hardcoded to 500ms).
+  (was hardcoded to 500 ms).
 
 ---
 
@@ -194,10 +265,11 @@ Format: [version] — date — summary
   capacity, and percentage used on its volume. Shown in the Modern inspector
   (Storage section with a usage bar), the Modern bottom status bar, and the
   Classic banner folder lines. Color-coded: green < 85%, yellow 85–95%, red > 95%.
-- **Duration accuracy coloring** — the DURATION column now compares the recording's
-  wall-clock elapsed time against the file's actual media playback length:
-  bright green when they match (within ~1.5s), yellow when slightly off (within 5s),
-  red when significantly off, and purple for imported (not-recorded-live) files.
+- **Duration accuracy coloring** — the DURATION column now compares the
+  recording's wall-clock elapsed time against the file's actual media playback
+  length: bright green when they match (within ~1.5s), yellow when slightly off
+  (within 5s), red when significantly off, and purple for imported
+  (not-recorded-live) files.
 - **Media duration for all files** — the DURATION column shows the real playback
   length of every completed file (from the AVFoundation probe), including
   pre-existing files found when a folder is added.
@@ -297,8 +369,3 @@ native macOS SwiftUI application.
   `ffprobe` for validation
 - Polled for file size changes, marked files stale after configurable timeout
 - Logged to timestamped `.log` files
-
-### AVProbeService.swift (handoff file)
-- Native AVFoundation replacement for ffprobe
-- Async probing with `AVAsset.load(.duration)` and `loadTracks(withMediaType:)`
-- Returns codec strings and duration detail for the validation column
