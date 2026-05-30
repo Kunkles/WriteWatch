@@ -9,6 +9,10 @@ struct TallyView: View {
     @State private var editMode         = false
     @State private var selectedIDs      = Set<UUID>()
 
+    // Drives re-evaluation of globalActiveCount — MonitorViewModel only publishes
+    // when the folders array changes, not when tracker entries inside folders change.
+    private let recordingTimer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+
     private var isRecording: Bool { vm.globalActiveCount > 0 }
 
     var body: some View {
@@ -152,6 +156,10 @@ struct TallyView: View {
             }
             .onChange(of: vm.globalActiveCount) { _, count in
                 store.handleRecordChange(isRecording: count > 0)
+            }
+            .onReceive(recordingTimer) { _ in
+                vm.objectWillChange.send()
+                store.handleRecordChange(isRecording: vm.globalActiveCount > 0)
             }
             .sheet(isPresented: $showingAddTally) {
                 AddTallyView { name, ip in

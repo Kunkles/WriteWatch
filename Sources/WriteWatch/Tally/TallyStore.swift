@@ -28,10 +28,14 @@ class TallyStore: ObservableObject {
 
     // MARK: - WriteWatch integration
 
+    private var lastRecordingState: Bool? = nil
+
     func handleRecordChange(isRecording: Bool) {
         guard followWriteWatch else { return }
+        guard isRecording != lastRecordingState else { return }
+        lastRecordingState = isRecording
         if isRecording {
-            manualOverride = false   // new record cycle clears manual override
+            manualOverride = false
             Task { await gangOn() }
         } else {
             guard !manualOverride else { return }
