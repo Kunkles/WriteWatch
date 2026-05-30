@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <!-- Enable App Sandbox -->
+    <key>com.apple.security.app-sandbox</key>
+    <true/>
+    <!-- Allow read access to folders the user selects via NSOpenPanel or drag-and-drop -->
+    <key>com.apple.security.files.user-selected.read-only</key>
+    <true/>
+    <!-- Allow AVFoundation to probe media files -->
+    <key>com.apple.security.assets.movies.read-only</key>
+    <true/>
+
+    <!--
+        NOTE: lsof (the "still open" check) spawns a subprocess and is blocked
+        by the App Sandbox. Two options:
+
+        Option A (recommended for distribution):
+            Remove the lsof check in FileTracker.swift → checkFileOpen()
+            and return `false` immediately. AVFoundation alone is usually
+            sufficient to detect incomplete files.
+
+        Option B (development / internal use):
+            Disable the sandbox entirely by removing the
+            com.apple.security.app-sandbox key above, or by setting
+            ENABLE_APP_SANDBOX = NO in the build settings.
+            This requires a Developer ID certificate for distribution outside
+            the Mac App Store.
+    -->
+</dict>
+</plist>
