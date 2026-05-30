@@ -3,8 +3,9 @@ import AppKit
 
 @main
 struct WriteWatchApp: App {
-    @StateObject private var monitorVM = MonitorViewModel()
-    @StateObject private var settings  = AppSettings.shared
+    @StateObject private var monitorVM  = MonitorViewModel()
+    @StateObject private var settings   = AppSettings.shared
+    @StateObject private var tallyStore = TallyStore()
 
     // Used to surface confirmation alerts from menu commands. RootView observes
     // these and presents the appropriate alert.
@@ -19,6 +20,7 @@ struct WriteWatchApp: App {
                 .environmentObject(monitorVM)
                 .environmentObject(settings)
                 .environmentObject(dialogs)
+                .environmentObject(tallyStore)
                 .preferredColorScheme(.dark)
                 .onAppear {
                     settings.seedDefaultLabelIfNeeded()

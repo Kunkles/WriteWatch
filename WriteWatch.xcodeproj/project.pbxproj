@@ -35,6 +35,15 @@
 		A2D50C890B3F4CA0A5DCFE89 = {isa = PBXBuildFile; fileRef = FDA67F8A5A10485F928EA4E8; };
 		E4294FC90C0F40F8B00248CB = {isa = PBXBuildFile; fileRef = 2D3C61A706C540409BF05CD3; };
 		9AA0F05DA28B463AB7C31393 = {isa = PBXBuildFile; fileRef = 2B11F8D2B5A549CEA2772755; };
+		980AD5DD0886418B89A9E1F8 = {isa = PBXBuildFile; fileRef = 37C98273608248B79401B962; };
+		4AD0311398694706861516DD = {isa = PBXBuildFile; fileRef = 1ECFF0040CCC446383983FDA; };
+		DC36BE76DCC04D27AB7B537A = {isa = PBXBuildFile; fileRef = 30502F30978C48B6BE59E929; };
+		71F530863E504FA99DEFF447 = {isa = PBXBuildFile; fileRef = CC7D76D26D824E328C70FB9C; };
+		802CB8999FD047C1A3BC32F8 = {isa = PBXBuildFile; fileRef = 4AD87BCCFA2C408B95C92D21; };
+		2A971F7BBBD846FA85DF4DDF = {isa = PBXBuildFile; fileRef = 9A746F9FDF7845E4A10C9835; };
+		DA2BBD93315D4D48A19B72F8 = {isa = PBXBuildFile; fileRef = 1C07920473BD45988F7B4AB4; };
+		BC4016905C6B4A829F67B717 = {isa = PBXBuildFile; fileRef = 3508750DF27F466080CA95D1; };
+		7B54F8E05C07499E8FCEF478 = {isa = PBXBuildFile; fileRef = 2D1E49BF895843B498ED4C61; };
 		/* End PBXBuildFile section */
 
 		/* Begin PBXFileReference section */
@@ -70,6 +79,15 @@
 		2D3C61A706C540409BF05CD3 = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2B11F8D2B5A549CEA2772755 = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = "rec_start.aiff"; sourceTree = "<group>"; };
 		F3C9E8A1728A49B4BFFDA3BC = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WriteWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		37C98273608248B79401B962 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TallyStore.swift"; sourceTree = "<group>"; };
+		1ECFF0040CCC446383983FDA = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TallyUnit.swift"; sourceTree = "<group>"; };
+		30502F30978C48B6BE59E929 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TallyDiscovery.swift"; sourceTree = "<group>"; };
+		CC7D76D26D824E328C70FB9C = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TallyRow.swift"; sourceTree = "<group>"; };
+		4AD87BCCFA2C408B95C92D21 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TallyButtonStyle.swift"; sourceTree = "<group>"; };
+		9A746F9FDF7845E4A10C9835 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddressHelper.swift"; sourceTree = "<group>"; };
+		1C07920473BD45988F7B4AB4 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TallyView.swift"; sourceTree = "<group>"; };
+		3508750DF27F466080CA95D1 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DiscoveryView.swift"; sourceTree = "<group>"; };
+		2D1E49BF895843B498ED4C61 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddTallyView.swift"; sourceTree = "<group>"; };
 		/* End PBXFileReference section */
 
 		59C57CADBC754D44A84C9B5F = {isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = ( ); runOnlyForDeploymentPostprocessing = 0; };
@@ -106,9 +124,26 @@
 			9132D1B8410243DF9A99AC45,
 			65532B8FCCF342A786D5499A,
 			2D3C61A706C540409BF05CD3,
+			742BAE59AA0245809B2109FE,
 			1FB1F817233B4031B0250D78,
 		);
 		name = WriteWatch; path = "Sources/WriteWatch"; sourceTree = "<group>"; };
+		742BAE59AA0245809B2109FE = {isa = PBXGroup; children = (
+			37C98273608248B79401B962,
+			1ECFF0040CCC446383983FDA,
+			30502F30978C48B6BE59E929,
+			CC7D76D26D824E328C70FB9C,
+			4AD87BCCFA2C408B95C92D21,
+			9A746F9FDF7845E4A10C9835,
+			986EB4DC5AF54AF688E74714,
+		);
+		name = Tally; path = Tally; sourceTree = "<group>"; };
+		986EB4DC5AF54AF688E74714 = {isa = PBXGroup; children = (
+			1C07920473BD45988F7B4AB4,
+			3508750DF27F466080CA95D1,
+			2D1E49BF895843B498ED4C61,
+		);
+		name = Views; path = Views; sourceTree = "<group>"; };
 		1FB1F817233B4031B0250D78 = {isa = PBXGroup; children = (
 			2B11F8D2B5A549CEA2772755,
 		);
@@ -152,6 +187,15 @@
 			19A09F4F1D3F415D9EF9AC76,
 			ACF34E8ACD3949D2B6930391,
 			A2D50C890B3F4CA0A5DCFE89,
+			980AD5DD0886418B89A9E1F8,
+			4AD0311398694706861516DD,
+			DC36BE76DCC04D27AB7B537A,
+			71F530863E504FA99DEFF447,
+			802CB8999FD047C1A3BC32F8,
+			2A971F7BBBD846FA85DF4DDF,
+			DA2BBD93315D4D48A19B72F8,
+			BC4016905C6B4A829F67B717,
+			7B54F8E05C07499E8FCEF478,
 		); runOnlyForDeploymentPostprocessing = 0; };
 
 		BF9261834724421BA4E11D5D = {isa = XCBuildConfiguration; buildSettings = {

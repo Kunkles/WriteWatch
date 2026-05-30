@@ -12,11 +12,13 @@ final class WindowSizeManager: ObservableObject {
     // Persisted widths — 0 means "not yet set, use default"
     @AppStorage("ww.classicWindowWidth") var classicWidth: Double = 0
     @AppStorage("ww.modernWindowWidth")  var modernWidth:  Double = 0
+    @AppStorage("ww.tallyWindowWidth")   var tallyWidth:   Double = 0
 
     // Called once on launch to set defaults if never stored
     func setDefaultsIfNeeded(classicTableWidth: CGFloat) {
         if classicWidth <= 0 { classicWidth = Double(classicTableWidth) }
         if modernWidth  <= 0 { modernWidth  = 1200 }
+        if tallyWidth   <= 0 { tallyWidth   = 480 }
     }
 
     // Save the current window width under the given mode key
@@ -25,6 +27,7 @@ final class WindowSizeManager: ObservableObject {
         switch mode {
         case .classic: classicWidth = Double(w)
         case .modern:  modernWidth  = Double(w)
+        case .tally:   tallyWidth   = Double(w)
         }
     }
 
@@ -35,6 +38,7 @@ final class WindowSizeManager: ObservableObject {
             switch mode {
             case .classic: return CGFloat(classicWidth)
             case .modern:  return CGFloat(modernWidth)
+            case .tally:   return CGFloat(tallyWidth)
             }
         }()
         guard targetWidth > 100 else { return }

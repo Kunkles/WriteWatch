@@ -4,17 +4,20 @@ import AppKit
 enum AppViewMode: String, CaseIterable {
     case classic = "Classic"
     case modern  = "Modern"
+    case tally   = "Tally"
     var icon: String {
         switch self {
         case .classic: return "text.alignleft"
         case .modern:  return "square.grid.2x2"
+        case .tally:   return "record.circle"
         }
     }
 }
 
 struct RootView: View {
-    @EnvironmentObject var vm:       MonitorViewModel
-    @EnvironmentObject var dialogs:  AppDialogs
+    @EnvironmentObject var vm:         MonitorViewModel
+    @EnvironmentObject var dialogs:    AppDialogs
+    @EnvironmentObject var tallyStore: TallyStore
     @StateObject private var colState  = ClassicColumnState()
     @StateObject private var winMgr    = WindowSizeManager()
 
@@ -29,6 +32,9 @@ struct RootView: View {
                     .environmentObject(colState)
             case .modern:
                 ModernView()
+            case .tally:
+                TallyView()
+                    .environmentObject(tallyStore)
             }
         }
         // Invisible view that gives us NSWindow access on first appear
@@ -78,21 +84,27 @@ struct RootView: View {
         )
         .toolbar {
             ToolbarItem(placement: .primaryAction) {
-                Picker("View", selection: $mode) {
+                HStack(spacing: 2) {
                     ForEach(AppViewMode.allCases, id: \.self) { m in
-                        Label(m.rawValue, systemImage: m.icon).tag(m)
+                        Button {
+                            mode = m
+                        } label: {
+                            Image(systemName: m.icon)
+                        }
+                        .help(m.rawValue)
+                        .buttonStyle(.plain)
+                        .padding(5)
+                        .background(mode == m ? Color.primary.opacity(0.12) : Color.clear, in: RoundedRectangle(cornerRadius: 5))
                     }
                 }
-                .pickerStyle(.segmented)
-                .frame(width: 160)
-                .help("Switch between Classic terminal view and Modern dashboard")
             }
         }
         .onChange(of: mode) { oldMode, newMode in
-            // Save the width we're leaving, then animate to the new mode's width
-            winMgr.recordWidth(for: oldMode)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.08) {
-                winMgr.applyWidth(for: newMode)
+            if oldMode != .tally { winMgr.recordWidth(for: oldMode) }
+            if newMode != .tally {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.08) {
+                    winMgr.applyWidth(for: newMode)
+                }
             }
         }
         // ── Confirmation alerts (triggered from File menu commands) ─────────
