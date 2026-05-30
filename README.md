@@ -84,6 +84,11 @@ Press **⌘R** to build and run.
 
 ## Changelog
 
+### v2.1.2-beta
+- Fix: crash on macOS 15.7+ caused by ATS (App Transport Security) flagging
+  plain HTTP connections to tally units as violations; added NSAllowsLocalNetworking
+  so ATS treats local network HTTP as permitted
+
 ### v2.1.1-beta
 - Fix: tally automation now works regardless of which tab is active — recording
   observer runs at the app level, not inside TallyView
