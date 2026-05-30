@@ -11,7 +11,7 @@ private let bannerRows: [String] = [
     "   ╚══╝╚══╝ ╚═╝  ╚═╝╚═╝   ╚═╝   ╚══════╝    ╚══╝╚══╝ ╚═╝  ╚═╝   ╚═╝    ╚═════╝╚═╝  ╚═╝",
 ]
 
-private let taglineVersion = "v1.8.3-beta"
+private let taglineVersion = "v1.8.4-beta"
 private let taglineText    = "··  real-time video transfer monitor  ··"
 
 // Scanline cycle: rows + generous pause at the bottom before looping.

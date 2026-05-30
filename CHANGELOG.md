@@ -5,6 +5,21 @@ Format: [version] — date — summary
 
 ---
 
+## [1.8.4-beta] — 2026-05-30
+
+### Fixed
+- **Watched folders now survive relaunch under the App Sandbox.** Previously
+  only the folder *path* was persisted, but the sandbox revokes folder access
+  between launches — so after a reboot the app could no longer read the folder
+  and every scan, live-watch, and rescan silently returned nothing (while free
+  space still displayed, making it look "loaded"). Folders are now persisted as
+  security-scoped bookmarks and access is re-asserted via
+  `startAccessingSecurityScopedResource()` before any filesystem read.
+  Note: folders added under the old path-only build must be removed and re-added
+  once to mint a bookmark.
+
+---
+
 ## [1.8.3-beta] — 2026-05-28
 
 ### Fixed

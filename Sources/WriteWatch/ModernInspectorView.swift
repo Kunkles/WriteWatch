@@ -96,7 +96,7 @@ struct FolderInspectorView: View {
 
             // App
             Section("App") {
-                inspRow(label: "Version",    value: "1.8.3-beta")
+                inspRow(label: "Version",    value: "1.8.4-beta")
                 HStack {
                     Text("Validation")
                         .font(.caption)
