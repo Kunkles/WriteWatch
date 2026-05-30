@@ -84,9 +84,12 @@ Press **⌘R** to build and run.
 
 ## Changelog
 
+### v2.1.1-beta
+- Fix: tally automation now works regardless of which tab is active — recording
+  observer runs at the app level, not inside TallyView
+
 ### v2.1.0-beta
 - Fix: tally no longer stays on when WriteWatch stops detecting active writes
-  (timer now polls recording state directly; transition guard prevents repeated HTTP calls)
 
 ### v2.0.0-beta
 - Tally tab with Follow WriteWatch automation

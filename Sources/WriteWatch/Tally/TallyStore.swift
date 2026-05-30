@@ -30,6 +30,15 @@ class TallyStore: ObservableObject {
 
     private var lastRecordingState: Bool? = nil
 
+    /// Polls MonitorViewModel every second and fires tally commands on transitions.
+    /// Must be started from the app root so it runs regardless of the active tab.
+    func startRecordingObserver(monitorVM: MonitorViewModel) async {
+        while true {
+            try? await Task.sleep(nanoseconds: 1_000_000_000)
+            handleRecordChange(isRecording: monitorVM.globalActiveCount > 0)
+        }
+    }
+
     func handleRecordChange(isRecording: Bool) {
         guard followWriteWatch else { return }
         guard isRecording != lastRecordingState else { return }

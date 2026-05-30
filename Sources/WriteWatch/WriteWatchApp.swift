@@ -33,6 +33,9 @@ struct WriteWatchApp: App {
                         monitorVM.restoreFolders()
                     }
                 }
+                .task {
+                    await tallyStore.startRecordingObserver(monitorVM: monitorVM)
+                }
         }
         .windowStyle(.titleBar)
         .defaultSize(width: 1200, height: 760)
