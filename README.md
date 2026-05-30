@@ -1,7 +1,6 @@
 # WriteWatch v2
 
-Real-time video transfer monitor for macOS with an integrated tally light controller.  
-Built by **32Thirteen Productions LLC**.
+Real-time video transfer monitor for macOS with an integrated tally light controller.
 
 ---
 
