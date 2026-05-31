@@ -67,12 +67,12 @@ Requires PageOS 6.x or later.
 | Setting | Value |
 | :--- | :--- |
 | GPI Function | Tally Indicator |
-| Polarity | Active High |
+| Polarity | Active Low |
 | GPI Pin | **Pin 7** (not Pin 1) |
 
 > Pin 1 does not work for tally on the OLED 22 — use Pin 7. Verified on hardware running PageOS 6.3.1.
 
-**Logic:** open circuit = tally ON, contact closure = tally OFF. This is why the firmware uses `HIGH` to activate — it opens the optocoupler output and turns the tally on.
+**Logic:** GPI pin LOW = tally ON, HIGH / open circuit = tally OFF. Signal chain: `/tally/on` → GPIO HIGH → PC817 LED on → phototransistor conducts → GPI pin pulled LOW → tally ON.
 
 ---
 
