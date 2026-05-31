@@ -16,8 +16,8 @@ The optocoupler input side is driven directly from the GPIO pin. No current-limi
 | Optocoupler Pin | Destination |
 | :--- | :--- |
 | `VCC` | 3.3V (ESP32) |
-| `OUT` | SmallHD RJ45 Pin 7 (GPI active) |
-| `GND` | SmallHD RJ45 Pin 8 (GPI ground) |
+| `OUT` | SmallHD RJ45 Pin 1 (GPI active) |
+| `GND` | SmallHD RJ45 Pin 5 (GPI ground) |
 
 ---
 

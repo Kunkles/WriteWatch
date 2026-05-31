@@ -41,10 +41,10 @@ GPI pin assignment and polarity vary by model. Bench test each model before prod
 | 1 | White/Orange | **GPI active (OLED 22)** |
 | 2 | Orange | — |
 | 3 | White/Green | — |
-| 4 | Blue | Check monitor docs |
-| 5 | White/Blue | Check monitor docs |
+| 4 | Blue | — |
+| 5 | White/Blue | **GPI ground (OLED 22)** |
 | 6 | Green | — |
 | 7 | White/Brown | — |
-| 8 | Brown | GPI ground |
+| 8 | Brown | — |
 
 > Use a screw terminal RJ45 breakout board for reliable connections. Bare Ethernet wire is 24AWG solid-core and makes poor contact when inserted directly into terminals.

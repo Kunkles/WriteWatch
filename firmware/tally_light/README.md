@@ -50,7 +50,7 @@ No current-limiting resistor needed — the NOYITO PC817 module has one built in
 | :--- | :--- |
 | `VCC` | 3.3V (ESP32) |
 | `OUT` | Pin 1 (GPI active — OLED 22) |
-| `GND` | Pin 8 (GPI ground) |
+| `GND` | Pin 5 (GPI ground) |
 
 > **Use a screw terminal RJ45 breakout** on the SmallHD end (e.g. [Poyiccot RJ45 screw terminal](https://www.amazon.com/dp/B07WKKVZRF)). Direct bare-wire insertion with cut Ethernet cable is unreliable — 24AWG solid-core conductors make poor contact in open terminals.
 
