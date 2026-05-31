@@ -44,9 +44,11 @@ See [`docs/wiring.md`](docs/wiring.md) for full diagrams.
 
 No current-limiting resistor needed — the NOYITO PC817 module has one built in.
 
-### Optocoupler → SmallHD RJ45 (output side)
+### Optocoupler → SmallHD GPI RJ45 port (output side)
 
-| Optocoupler | SmallHD RJ45 |
+Connect to the **GPI RJ45 port** on the SmallHD monitor — not the Ethernet port.
+
+| Optocoupler | SmallHD GPI RJ45 Pin |
 | :--- | :--- |
 | `VCC` | 3.3V (ESP32) |
 | `OUT` | Pin 1 (GPI active — OLED 22) |

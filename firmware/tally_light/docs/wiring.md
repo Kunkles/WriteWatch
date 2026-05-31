@@ -11,13 +11,15 @@ The optocoupler input side is driven directly from the GPIO pin. No current-limi
 
 ---
 
-## Optocoupler to SmallHD RJ45
+## Optocoupler to SmallHD GPI RJ45 Port
 
-| Optocoupler Pin | Destination |
+Connect to the **GPI RJ45 port** on the SmallHD monitor (not the Ethernet port).
+
+| Optocoupler Pin | SmallHD GPI RJ45 Pin |
 | :--- | :--- |
 | `VCC` | 3.3V (ESP32) |
-| `OUT` | SmallHD RJ45 Pin 1 (GPI active) |
-| `GND` | SmallHD RJ45 Pin 5 (GPI ground) |
+| `OUT` | Pin 1 (GPI active) |
+| `GND` | Pin 5 (GPI ground) |
 
 ---
 

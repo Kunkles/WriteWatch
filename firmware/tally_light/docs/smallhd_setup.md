@@ -34,7 +34,9 @@ GPI pin assignment and polarity vary by model. Bench test each model before prod
 
 ---
 
-## RJ45 Pinout Reference (T568B)
+## GPI RJ45 Port Pinout
+
+Pin numbers refer to the **GPI RJ45 port** on the SmallHD monitor, not the Ethernet port.
 
 | Pin | Color | Used for tally |
 | :--- | :--- | :--- |
