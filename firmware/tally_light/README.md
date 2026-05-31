@@ -49,7 +49,7 @@ No current-limiting resistor needed — the NOYITO PC817 module has one built in
 | Optocoupler | SmallHD RJ45 |
 | :--- | :--- |
 | `VCC` | 3.3V (ESP32) |
-| `OUT` | Pin 7 (GPI active — OLED 22) |
+| `OUT` | Pin 1 (GPI active — OLED 22) |
 | `GND` | Pin 8 (GPI ground) |
 
 > **Use a screw terminal RJ45 breakout** on the SmallHD end (e.g. [Poyiccot RJ45 screw terminal](https://www.amazon.com/dp/B07WKKVZRF)). Direct bare-wire insertion with cut Ethernet cable is unreliable — 24AWG solid-core conductors make poor contact in open terminals.
@@ -64,13 +64,13 @@ See [`docs/smallhd_setup.md`](docs/smallhd_setup.md) for full setup instructions
 
 Requires PageOS 6.x or later.
 
+First: **Menu → User Functions → Press-and-Hold to Edit → Off** — required for GPI tally to work in this configuration.
+
 | Setting | Value |
 | :--- | :--- |
 | GPI Function | Tally Indicator |
 | Polarity | Active Low |
-| GPI Pin | **Pin 7** (not Pin 1) |
-
-> Pin 1 does not work for tally on the OLED 22 — use Pin 7. Verified on hardware running PageOS 6.3.1.
+| GPI Pin | **Pin 1** |
 
 **Logic:** GPI pin LOW = tally ON, HIGH / open circuit = tally OFF. Signal chain: `/tally/on` → GPIO HIGH → PC817 LED on → phototransistor conducts → GPI pin pulled LOW → tally ON.
 

@@ -4,14 +4,21 @@
 
 PageOS 6.x or later required.
 
-**GPI Settings:**
+### User Functions menu
+
+Before configuring GPI, disable press-and-hold editing:
+
+**Menu → User Functions → Press-and-Hold to Edit → Off**
+
+This must be off for GPI tally to work correctly in this configuration.
+
+### GPI Settings
+
 | Setting | Value |
 | :--- | :--- |
 | GPI Function | Tally Indicator |
 | Polarity | Active Low |
-| GPI Pin | **Pin 7** |
-
-> **Pin 1 does not work for tally on the OLED 22.** Use Pin 7. This differs from what some documentation states — verified on hardware.
+| GPI Pin | **Pin 1** |
 
 **Behavior:**
 - GPI pin LOW = Tally ON
@@ -31,13 +38,13 @@ GPI pin assignment and polarity vary by model. Bench test each model before prod
 
 | Pin | Color | Used for tally |
 | :--- | :--- | :--- |
-| 1 | White/Orange | — |
+| 1 | White/Orange | **GPI active (OLED 22)** |
 | 2 | Orange | — |
 | 3 | White/Green | — |
 | 4 | Blue | Check monitor docs |
 | 5 | White/Blue | Check monitor docs |
 | 6 | Green | — |
-| 7 | White/Brown | **GPI active (OLED 22)** |
+| 7 | White/Brown | — |
 | 8 | Brown | GPI ground |
 
 > Use a screw terminal RJ45 breakout board for reliable connections. Bare Ethernet wire is 24AWG solid-core and makes poor contact when inserted directly into terminals.
