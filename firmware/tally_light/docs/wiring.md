@@ -17,7 +17,7 @@ Connect to the **GPI RJ45 port** on the SmallHD monitor (not the Ethernet port).
 
 | Optocoupler Pin | SmallHD GPI RJ45 Pin |
 | :--- | :--- |
-| `VCC` | 3.3V (ESP32) |
+| `VCC` | — (leave disconnected) |
 | `OUT` | Pin 1 (GPI active) |
 | `GND` | Pin 5 (GPI ground) |
 
